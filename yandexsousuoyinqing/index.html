@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YANDEX搜索引擎 - 搜索技术视频官网 - 让每一次检索都值得信赖</title>
+<meta name="description" content="YANDEX搜索引擎官方网站，专注搜索技术与信息检索的原创视频内容平台，汇聚搜索工程师与创作者，呈现高品质检索知识与企业动态。">
+<style>
+:root{
+  --bg:#0d1117;
+  --bg-2:#121a24;
+  --panel:#161f2b;
+  --panel-2:#1c2735;
+  --line:#23303f;
+  --txt:#e6edf3;
+  --txt-2:#9fb0c3;
+  --txt-3:#6d8098;
+  --acc:#ffcc00;
+  --acc-2:#ff4d4d;
+  --cyan:#39d0ff;
+  --violet:#8b7bff;
+  --radius:14px;
+  --max:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- 吸顶：公告条 + 页头 ---------- */
+.sticky-top{position:sticky;top:0;z-index:900}
+.notice{
+  background:linear-gradient(90deg,#8b7bff,#39d0ff 55%,#ffcc00);
+  color:#0b1017;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+.notice .wrap{display:flex;align-items:center;gap:12px;padding:8px 24px;flex-wrap:wrap}
+.notice .dot{width:7px;height:7px;border-radius:50%;background:#0b1017;flex:0 0 auto;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.notice-item{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notice .sep{opacity:.4}
+.notice a{text-decoration:underline;text-underline-offset:3px}
+
+header.site{
+  background:rgba(13,17,23,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{display:flex;align-items:center;gap:22px;padding:12px 24px;max-width:var(--max);margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.logo-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:conic-gradient(from 210deg,#ffcc00,#ff4d4d,#8b7bff,#39d0ff,#ffcc00);
+  display:grid;place-items:center;
+  font-weight:800;color:#0b1017;font-size:17px;letter-spacing:-.5px;
+  box-shadow:0 0 0 1px rgba(255,204,0,.35),0 6px 18px rgba(139,123,255,.25);
+}
+.logo-text strong{display:block;font-size:15px;letter-spacing:.5px}
+.logo-text span{display:block;font-size:10.5px;color:var(--txt-3);letter-spacing:2px;text-transform:uppercase}
+nav.main{display:flex;gap:4px;flex-wrap:wrap;flex:1 1 auto}
+nav.main a{
+  font-size:13.5px;color:var(--txt-2);padding:7px 11px;border-radius:8px;
+  transition:.18s;white-space:nowrap;
+}
+nav.main a:hover{color:var(--txt);background:var(--panel-2)}
+.nav-tools{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.search-box{position:relative;display:flex;align-items:center}
+.search-box input{
+  width:190px;background:var(--panel);border:1px solid var(--line);color:var(--txt);
+  padding:8px 34px 8px 12px;border-radius:9px;font-size:13px;outline:none;transition:.2s;
+}
+.search-box input:focus{border-color:var(--acc);width:230px;box-shadow:0 0 0 3px rgba(255,204,0,.12)}
+.search-box button{position:absolute;right:4px;width:26px;height:26px;border-radius:6px;color:var(--txt-3);display:grid;place-items:center}
+.search-box button:hover{color:var(--acc)}
+.search-tip{
+  position:absolute;top:calc(100% + 8px);right:0;width:250px;
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;font-size:12.5px;color:var(--txt-2);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);display:none;
+}
+.search-tip.show{display:block}
+.search-tip b{color:var(--acc)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:9px 18px;border-radius:9px;font-size:13.5px;font-weight:600;transition:.2s;
+  border:1px solid transparent;white-space:nowrap;
+}
+.btn-primary{background:var(--acc);color:#111a22}
+.btn-primary:hover{background:#ffd633;transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line);color:var(--txt-2);background:var(--panel)}
+.btn-ghost:hover{color:var(--txt);border-color:var(--acc);background:var(--panel-2)}
+.btn-sm{padding:6px 12px;font-size:12.5px;border-radius:7px}
+.burger{display:none;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);align-items:center;justify-content:center}
+.burger span{display:block;width:17px;height:2px;background:var(--txt);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:17px;height:2px;background:var(--txt)}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(900px 420px at 82% 8%,rgba(139,123,255,.20),transparent 62%),
+    radial-gradient(700px 380px at 8% 92%,rgba(255,204,0,.10),transparent 60%),
+    var(--bg);
+}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding:64px 0 72px;align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:1px;
+  color:var(--acc);border:1px solid rgba(255,204,0,.35);background:rgba(255,204,0,.07);
+  padding:5px 12px;border-radius:99px;margin-bottom:20px;font-weight:600;
+}
+.hero h1{font-size:clamp(32px,4.4vw,54px);line-height:1.16;letter-spacing:-1px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--acc);position:relative}
+.hero-sub{margin-top:18px;font-size:15.5px;color:var(--txt-2);max-width:520px}
+.hero-lead{margin-top:20px;font-size:14px;color:var(--txt-3);line-height:1.95;max-width:560px}
+.hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;max-width:520px}
+.stat{padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;transition:.2s}
+.stat:hover{border-color:rgba(255,204,0,.4);transform:translateY(-2px)}
+.stat b{display:block;font-size:24px;color:var(--acc);letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:12px;color:var(--txt-3);margin-top:2px}
+.hero-visual{position:relative}
+.screen{
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:var(--panel);box-shadow:0 30px 70px rgba(0,0,0,.55);
+  animation:float 7s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.screen-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel-2)}
+.screen-bar i{width:9px;height:9px;border-radius:50%;display:block}
+.screen-bar i:nth-child(1){background:#ff5f57}.screen-bar i:nth-child(2){background:#febc2e}.screen-bar i:nth-child(3){background:#28c840}
+.screen-bar em{margin-left:8px;font-style:normal;font-size:11.5px;color:var(--txt-3);letter-spacing:.5px}
+.screen-body{padding:18px}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pill{font-size:11.5px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--txt-2)}
+.pill.on{background:rgba(255,204,0,.14);border-color:rgba(255,204,0,.5);color:var(--acc)}
+.res-list{display:flex;flex-direction:column;gap:12px}
+.res{display:flex;gap:12px;padding:10px;border-radius:10px;border:1px solid transparent;transition:.2s}
+.res:hover{background:var(--panel-2);border-color:var(--line)}
+.res-ico{width:34px;height:34px;border-radius:8px;flex:0 0 auto;display:grid;place-items:center;font-size:13px;font-weight:800;color:#0b1017}
+.res-txt strong{display:block;font-size:13px;color:var(--txt)}
+.res-txt span{display:block;font-size:11.5px;color:var(--txt-3);margin-top:1px}
+.float-tag{
+  position:absolute;right:-14px;bottom:-18px;background:var(--panel-2);
+  border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:12px;
+  color:var(--txt-2);box-shadow:0 16px 40px rgba(0,0,0,.5);
+}
+.float-tag b{color:var(--cyan);font-size:16px;display:block;letter-spacing:-.5px}
+
+/* ---------- 通用 section ---------- */
+section{padding:76px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(23px,2.9vw,33px);letter-spacing:-.6px;font-weight:800;line-height:1.25}
+.sec-head h2 span{color:var(--acc)}
+.sec-head p{color:var(--txt-3);font-size:13.5px;max-width:520px;margin-top:8px}
+.sec-tag{font-size:11.5px;letter-spacing:2px;color:var(--violet);font-weight:700;text-transform:uppercase;margin-bottom:10px;display:block}
+
+/* ---------- 焦点视频 ---------- */
+.focus-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:22px}
+.vcard{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;transition:.25s;display:flex;flex-direction:column;
+}
+.vcard:hover{transform:translateY(-4px);border-color:rgba(139,123,255,.5);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.cover{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0a0f16}
+.cover svg{width:100%;height:100%;transition:transform .5s}
+.vcard:hover .cover svg{transform:scale(1.05)}
+.cover .play{
+  position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;
+  background:rgba(11,16,23,.62);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.28);
+  display:grid;place-items:center;transition:.25s;
+}
+.vcard:hover .play{background:var(--acc);border-color:var(--acc)}
+.vcard:hover .play svg path{fill:#0b1017}
+.cover .corner{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  font-size:10.5px;padding:3px 8px;border-radius:6px;background:rgba(11,16,23,.75);
+  color:#e6edf3;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(4px);letter-spacing:.3px;
+}
+.chip.hot{background:var(--acc-2);border-color:var(--acc-2);color:#fff;font-weight:700}
+.chip.new{background:var(--cyan);border-color:var(--cyan);color:#07131a;font-weight:700}
+.cover .dur{
+  position:absolute;bottom:10px;right:10px;font-size:11px;padding:2px 7px;border-radius:5px;
+  background:rgba(11,16,23,.8);color:#dfe8f1;font-variant-numeric:tabular-nums;
+}
+.vbody{padding:16px 17px 17px;display:flex;flex-direction:column;gap:8px;flex:1}
+.vbody h3{font-size:16px;line-height:1.45;font-weight:700}
+.vbody h3 a:hover{color:var(--acc)}
+.vmeta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--txt-3);flex-wrap:wrap}
+.avatar{
+  width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;font-weight:800;color:#0b1017;flex:0 0 auto;letter-spacing:-.3px;
+}
+.vdesc{font-size:12.5px;color:var(--txt-3);line-height:1.7;flex:1}
+.vfoot{display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--txt-3)}
+.act{display:inline-flex;align-items:center;gap:5px;transition:.18s;padding:2px 0}
+.act:hover{color:var(--acc)}
+.act.liked{color:var(--acc-2)}
+.act.faved{color:var(--acc)}
+.act svg{width:14px;height:14px}
+.side-list{display:flex;flex-direction:column;gap:14px}
+.mini{display:grid;grid-template-columns:118px 1fr;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+.mini:hover{border-color:rgba(57,208,255,.45);transform:translateX(3px)}
+.mini .cover{aspect-ratio:16/10;border-radius:0}
+.mini .cover .play{width:32px;height:32px}
+.mini-txt{padding:12px 12px 12px 0;display:flex;flex-direction:column;gap:5px;justify-content:center}
+.mini-txt strong{font-size:13.5px;line-height:1.45;font-weight:600}
+.mini-txt span{font-size:11.5px;color:var(--txt-3)}
+
+/* ---------- 视频流 ---------- */
+.stream{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.filters button{
+  font-size:12.5px;padding:6px 14px;border-radius:99px;border:1px solid var(--line);
+  color:var(--txt-2);background:var(--panel);transition:.2s;
+}
+.filters button:hover{color:var(--txt);border-color:var(--violet)}
+.filters button.active{background:var(--violet);border-color:var(--violet);color:#fff;font-weight:600}
+.is-hidden{display:none !important}
+
+/* ---------- 专题 ---------- */
+.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.topic{
+  position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  background:var(--panel);transition:.25s;display:flex;flex-direction:column;
+}
+.topic:hover{transform:translateY(-4px);border-color:rgba(255,204,0,.45)}
+.topic .cover{aspect-ratio:4/3}
+.topic-info{padding:14px 15px 16px}
+.topic-info h3{font-size:14.5px;line-height:1.45;margin-bottom:6px}
+.topic-info p{font-size:12px;color:var(--txt-3);line-height:1.65}
+.topic-status{
+  display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--cyan);
+  margin-top:9px;font-weight:600;
+}
+.topic-status i{width:6px;height:6px;border-radius:50%;background:var(--cyan);display:block;animation:pulse 1.6s infinite}
+
+/* ---------- 创作者 ---------- */
+.creator-scroll{display:flex;gap:18px;overflow-x:auto;padding:4px 4px 18px;scroll-snap-type:x mandatory}
+.creator-scroll::-webkit-scrollbar{height:7px}
+.creator-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.creator{
+  scroll-snap-align:start;flex:0 0 274px;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:20px;transition:.25s;
+}
+.creator:hover{border-color:rgba(139,123,255,.5);transform:translateY(-4px)}
+.creator-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.creator-av{
+  width:50px;height:50px;border-radius:14px;display:grid;place-items:center;
+  font-size:19px;font-weight:800;color:#0b1017;flex:0 0 auto;
+}
+.creator-top strong{display:block;font-size:14.5px}
+.creator-top span{display:block;font-size:11.5px;color:var(--acc);margin-top:1px}
+.creator p{font-size:12.5px;color:var(--txt-3);line-height:1.7;min-height:64px}
+.creator-nums{display:flex;gap:16px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.creator-nums div b{display:block;font-size:15px;color:var(--txt);letter-spacing:-.3px}
+.creator-nums div span{display:block;font-size:11px;color:var(--txt-3)}
+.creator-more{margin-top:14px;width:100%}
+
+/* ---------- 故事 ---------- */
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.story{
+  background:linear-gradient(165deg,var(--panel-2),var(--panel));
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.2s;
+  position:relative;overflow:hidden;
+}
+.story::before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--violet),var(--cyan),var(--acc));
+}
+.story:hover{transform:translateY(-3px);border-color:rgba(57,208,255,.4)}
+.story h3{font-size:16px;margin-bottom:10px;line-height:1.5}
+.story p{font-size:13px;color:var(--txt-2);line-height:1.9}
+.story-by{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:12px;color:var(--txt-3)}
+
+/* ---------- 作品墙 ---------- */
+.wall{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;grid-auto-rows:112px}
+.wall figure{
+  position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);
+  background:var(--panel);transition:.25s;
+}
+.wall figure:hover{border-color:var(--acc);transform:scale(1.015)}
+.wall figure svg{width:100%;height:100%;object-fit:cover}
+.wall figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:18px 12px 10px;
+  font-size:12px;color:#eaf2fa;background:linear-gradient(transparent,rgba(6,10,15,.9));
+  line-height:1.4;
+}
+.w1{grid-column:span 3;grid-row:span 2}
+.w2{grid-column:span 3;grid-row:span 1}
+.w3{grid-column:span 2;grid-row:span 1}
+.w4{grid-column:span 1;grid-row:span 1}
+.w5{grid-column:span 2;grid-row:span 2}
+.w6{grid-column:span 2;grid-row:span 1}
+.w7{grid-column:span 2;grid-row:span 1}
+
+/* ---------- 评论 ---------- */
+.voices{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.voice{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;position:relative;transition:.2s;
+}
+.voice:hover{border-color:rgba(255,204,0,.4)}
+.voice.q::after{
+  content:"”";position:absolute;right:18px;bottom:-6px;font-size:52px;color:rgba(255,204,0,.16);
+  font-family:Georgia,serif;line-height:1;
+}
+.voice-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.voice-head strong{font-size:13.5px}
+.voice-head span{font-size:11.5px;color:var(--txt-3);margin-left:auto}
+.voice p{font-size:13px;color:var(--txt-2);line-height:1.9}
+.stars{color:var(--acc);font-size:12px;letter-spacing:2px;margin-top:10px;display:block}
+
+/* ---------- 动态 / FAQ / 合作 ---------- */
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:start}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:22px}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.tl{position:relative;padding:0 0 22px}
+.tl::before{
+  content:"";position:absolute;left:-21px;top:7px;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--acc);
+}
+.tl time{font-size:11.5px;color:var(--acc);letter-spacing:.5px;font-weight:600}
+.tl strong{display:block;font-size:14px;margin:3px 0 4px}
+.tl p{font-size:12.5px;color:var(--txt-3);line-height:1.7}
+.faq details{
+  background:var(--panel);border:1px solid var(--line);border-radius:11px;
+  padding:0;margin-bottom:10px;overflow:hidden;transition:.2s;
+}
+.faq details[open]{border-color:rgba(57,208,255,.45)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:14px 44px 14px 16px;font-size:13.5px;font-weight:600;
+  position:relative;transition:.2s;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  color:var(--acc);font-size:17px;font-weight:400;transition:.2s;
+}
+.faq details[open] summary::after{content:"−"}
+.faq summary:hover{background:var(--panel-2)}
+.faq .answer{padding:0 16px 16px;font-size:12.5px;color:var(--txt-3);line-height:1.9}
+.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+.partner{
+  border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  padding:14px 10px;text-align:center;font-size:12.5px;color:var(--txt-2);
+  font-weight:600;letter-spacing:.4px;transition:.2s;
+}
+.partner:hover{color:var(--acc);border-color:rgba(255,204,0,.4);background:var(--panel-2)}
+
+/* ---------- 投稿 CTA ---------- */
+.cta{
+  border:1px solid var(--line);border-radius:20px;padding:44px 40px;
+  background:
+    radial-gradient(600px 240px at 88% 10%,rgba(255,204,0,.16),transparent 60%),
+    radial-gradient(500px 220px at 5% 90%,rgba(139,123,255,.18),transparent 60%),
+    var(--panel);
+  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
+}
+.cta h2{font-size:clamp(21px,2.6vw,29px);letter-spacing:-.5px;margin-bottom:8px}
+.cta p{font-size:13.5px;color:var(--txt-3);max-width:520px}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- 页脚 ---------- */
+footer.site{
+  border-top:1px solid var(--line);background:var(--bg-2);padding:52px 0 28px;margin-top:20px;
+}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:34px;padding-bottom:34px;border-bottom:1px solid var(--line)}
+.foot-grid h4{font-size:13px;letter-spacing:1px;margin-bottom:14px;color:var(--txt)}
+.foot-grid a,.foot-grid p{display:block;font-size:12.5px;color:var(--txt-3);line-height:2.1;transition:.18s}
+.foot-grid a:hover{color:var(--acc)}
+.foot-desc{font-size:12.5px;color:var(--txt-3);line-height:1.95;margin-top:12px;max-width:330px}
+.foot-bottom{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding-top:22px;font-size:12px;color:var(--txt-3);
+}
+.foot-bottom .beian{display:flex;gap:16px;flex-wrap:wrap}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.badge{
+  font-size:11px;padding:3px 9px;border-radius:6px;border:1px solid var(--line);
+  color:var(--txt-3);background:var(--panel);
+}
+
+/* ---------- 弹窗 / Toast ---------- */
+.modal-mask{
+  position:fixed;inset:0;background:rgba(5,8,12,.78);backdrop-filter:blur(6px);
+  z-index:1200;display:none;align-items:center;justify-content:center;padding:24px;
+}
+.modal-mask.show{display:flex}
+.modal{
+  width:100%;max-width:520px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.65);
+  max-height:86vh;overflow:auto;animation:pop .22s ease;
+}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.modal-head h3{font-size:17px}
+.modal-close{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--txt-3);border:1px solid var(--line)}
+.modal-close:hover{color:var(--txt);border-color:var(--acc)}
+.modal p{font-size:13px;color:var(--txt-2);line-height:1.9}
+.field{margin-top:14px}
+.field label{display:block;font-size:12px;color:var(--txt-3);margin-bottom:6px}
+.field input,.field textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);color:var(--txt);
+  border-radius:9px;padding:10px 12px;font-size:13px;outline:none;font-family:inherit;
+}
+.field input:focus,.field textarea:focus{border-color:var(--acc)}
+.field textarea{min-height:88px;resize:vertical}
+.share-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.share-row button{
+  padding:12px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);
+  font-size:12.5px;color:var(--txt-2);transition:.2s;
+}
+.share-row button:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+.copy-line{display:flex;gap:8px;margin-top:16px}
+.copy-line input{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 11px;color:var(--txt-3);font-size:12px;outline:none}
+.toast{
+  position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);
+  background:var(--acc);color:#101820;font-size:13px;font-weight:700;
+  padding:11px 22px;border-radius:10px;z-index:1500;opacity:0;pointer-events:none;
+  transition:.28s;box-shadow:0 14px 34px rgba(0,0,0,.5);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+#toTop{
+  position:fixed;right:22px;bottom:26px;width:44px;height:44px;border-radius:12px;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--txt-2);
+  display:grid;place-items:center;z-index:800;opacity:0;pointer-events:none;transition:.25s;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{color:var(--acc);border-color:var(--acc);transform:translateY(-3px)}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:40px;padding:48px 0 56px}
+  .focus-grid{grid-template-columns:1fr}
+  .stream{grid-template-columns:repeat(2,1fr)}
+  .topic-grid{grid-template-columns:repeat(2,1fr)}
+  .story-grid{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:34px}
+  .voices{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .search-box input{width:150px}
+  .search-box input:focus{width:180px}
+}
+@media(max-width:768px){
+  html{scroll-padding-top:96px}
+  .burger{display:flex}
+  nav.main{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    background:var(--bg-2);border-bottom:1px solid var(--line);
+    padding:12px 24px 18px;flex-direction:column;gap:2px;
+  }
+  nav.main.open{display:flex}
+  nav.main a{padding:10px 8px;font-size:14px}
+  .nav-row{position:relative;flex-wrap:wrap}
+  .search-box{order:3;width:100%;margin-top:10px}
+  .search-box input{width:100%}
+  .search-box input:focus{width:100%}
+  .nav-tools{order:2}
+  .hero h1{letter-spacing:-.5px}
+  .stats{grid-template-columns:repeat(3,1fr);gap:10px}
+  .stat b{font-size:19px}
+  .stream{grid-template-columns:1fr}
+  .wall{grid-template-columns:repeat(2,1fr);grid-auto-rows:104px}
+  .w1,.w2,.w3,.w4,.w5,.w6,.w7{grid-column:span 1;grid-row:span 1}
+  .w1{grid-column:span 2}
+  .cta{padding:30px 22px}
+  .foot-grid{grid-template-columns:1fr;gap:24px}
+  .float-tag{right:8px;bottom:-14px}
+  section{padding:56px 0}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-top">
+  <div class="notice" aria-label="品牌公告">
+    <div class="wrap">
+      <i class="dot" aria-hidden="true"></i>
+      <span class="notice-item">新增：「搜索原理公开课」第 12 期上线，聚焦倒排索引与召回排序</span>
+      <span class="sep" aria-hidden="true">|</span>
+      <span class="notice-item">2025 创作者招募计划开放报名</span>
+      <span class="sep" aria-hidden="true">|</span>
+      <a href="#updates">查看全部更新</a>
+    </div>
+  </div>
+
+  <header class="site">
+    <div class="nav-row">
+      <a class="logo" href="#top" aria-label="YANDEX搜索引擎官网首页">
+        <span class="logo-mark" aria-hidden="true">YX</span>
+        <span class="logo-text">
+          <strong>YANDEX搜索引擎</strong>
+          <span>SEARCH ENGINE</span>
+        </span>
+      </a>
+
+      <nav class="main" id="mainNav" aria-label="主导航">
+        <a href="#focus">视频焦点</a>
+        <a href="#stream">热门内容</a>
+        <a href="#topics">专题企划</a>
+        <a href="#creators">创作者</a>
+        <a href="#stories">搜索随笔</a>
+        <a href="#gallery">影像墙</a>
+        <a href="#updates">企业动态</a>
+        <a href="#faq">帮助</a>
+      </nav>
+
+      <div class="nav-tools">
+        <div class="search-box">
+          <label class="sr" for="siteSearch">站内搜索</label>
+          <input id="siteSearch" type="search" placeholder="搜索检索技术内容" autocomplete="off">
+          <button type="button" id="searchBtn" aria-label="搜索">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+          </button>
+          <div class="search-tip" id="searchTip"></div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" id="submitBtn">投稿入口</button>
+        <button type="button" class="burger" id="burger" aria-label="展开导航" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.8 1.2 6.9L12 17.6 5.8 20.9 7 14 2 9.2l7.1-.9z"/></svg>
+          官方网站 · 搜索技术视频门户
+        </span>
+        <h1 id="heroTitle">YANDEX搜索引擎<em>视频官网</em></h1>
+        <p class="hero-sub">以原创影像记录信息检索的每一个技术细节，让搜索变成一件可以被理解、被讲述、被信赖的事。</p>
+        <p class="hero-lead">YANDEX搜索引擎作为垂直领域的检索技术品牌，致力于搭建高品质内容生态：我们邀请搜索工程师、算法研究员、产品经理与海量创作者，用视频讲述索引构建、查询理解、排序策略与索引工程背后的真实过程。这里既有硬核的技术拆解，也有温暖的开发者故事，是行业领先的搜索知识社区，也是用户首选的检索信息入口。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#focus">开始浏览焦点内容</a>
+          <a class="btn btn-ghost" href="#creators">认识创作者</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b data-count="12800">0</b><span>原创视频条目</span></div>
+          <div class="stat"><b data-count="326">0</b><span>签约创作者</span></div>
+          <div class="stat"><b data-count="98.6" data-dec="1">0</b><span>用户口碑满意度(%)</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="screen" role="img" aria-label="搜索技术内容导航界面示意">
+          <div class="screen-bar"><i></i><i></i><i></i><em>检索技术内容面板预览</em></div>
+          <div class="screen-body">
+            <div class="pill-row">
+              <span class="pill on">索引构建</span>
+              <span class="pill">查询理解</span>
+              <span class="pill">排序策略</span>
+              <span class="pill">工程实践</span>
+            </div>
+            <div class="res-list">
+              <div class="res">
+                <span class="res-ico" style="background:#ffcc00">索</span>
+                <span class="res-txt"><strong>倒排索引是怎么建起来的</strong><span>基础原理 · 18 分钟</span></span>
+              </div>
+              <div class="res">
+                <span class="res-ico" style="background:#39d0ff">召</span>
+                <span class="res-txt"><strong>召回与粗排的工程取舍</strong><span>工程实践 · 24 分钟</span></span>
+              </div>
+              <div class="res">
+                <span class="res-ico" style="background:#8b7bff">语</span>
+                <span class="res-txt"><strong>查询语义理解的三种路径</strong><span>深度测评 · 31 分钟</span></span>
+              </div>
+              <div class="res">
+                <span class="res-ico" style="background:#ff4d4d">评</span>
+                <span class="res-txt"><strong>搜索质量评估指标全解</strong><span>教程干货 · 22 分钟</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-tag"><b>每周三 20:00</b>技术公开课固定更新</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 焦点视频 -->
+  <section id="focus" aria-labelledby="focusTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Featured</span>
+          <h2 id="focusTitle">焦点内容 <span>/ 本周精选</span></h2>
+          <p>由编辑部与算法评审团共同筛选，聚焦搜索技术中最值得被讲清楚的问题。</p>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="#stream">浏览全部内容</a>
+      </div>
+
+      <div class="focus-grid">
+        <article class="vcard">
+          <div class="cover">
+            <svg viewBox="0 0 640 360" role="img" aria-label="倒排索引构建流程的技术讲解封面">
+              <defs>
+                <linearGradient id="f1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#101a2e"/><stop offset="1" stop-color="#2a1d4a"/>
+                </linearGradient>
+              </defs>
+              <rect width="640" height="360" fill="url(#f1)"/>
+              <g stroke="#3b4d6b" stroke-width="1.2" opacity=".8">
+                <path d="M60 300h520M60 250h520M60 200h520M60 150h520M60 100h520"/>
+              </g>
+              <g fill="none" stroke="#ffcc00" stroke-width="2.6">
+                <circle cx="170" cy="180" r="46"/><circle cx="320" cy="120" r="30"/><circle cx="320" cy="250" r="30"/><circle cx="475" cy="180" r="46"/>
+                <path d="M216 180h74M350 138l-14 96M350 222l-14-96M350 120h103M350 250h103"/>
+              </g>
+              <g fill="#e6edf3" font-size="15" font-family="sans-serif" text-anchor="middle">
+                <text x="170" y="186">词项</text><text x="320" y="126">词典</text>
+                <text x="320" y="256">文档</text><text x="475" y="186">索引</text>
+              </g>
+              <g fill="#39d0ff" opacity=".55"><rect x="540" y="70" width="6" height="34"/><rect x="552" y="90" width="6" height="34"/><rect x="564" y="60" width="6" height="34"/></g>
+            </svg>
+            <div class="corner"><span class="chip hot">焦点</span><span class="chip">技术拆解</span></div>
+            <span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">32:18</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#focus">从零构建一个倒排索引：词项、词典与文档的三次握手</a></h3>
+            <div class="vmeta">
+              <span class="avatar" style="background:#ffcc00">陈</span>
+              <span>陈叙白</span><span>·</span><span>2025-03-18</span><span>·</span><span>4.2 万次播放</span>
+            </div>
+            <p class="vdesc">把索引这件事拆成可以画在图上的步骤：分词如何落地为词项、词典为什么需要前缀压缩、文档列表为何采用跳表组织。全程手绘白板讲解，附带一份可运行的示例工程说明，适合检索方向的入门者与转岗同学。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="4280">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg>
+                <span class="likeNum">4280</span>
+              </button>
+              <button class="act favBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg>
+                <span>收藏</span>
+              </button>
+              <button class="act shareBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path d="M12 16V3"/><path d="M7 8l5-5 5 5"/></svg>
+                <span>分享</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <div class="side-list">
+          <a class="mini" href="#stream">
+            <div class="cover">
+              <svg viewBox="0 0 320 200" role="img" aria-label="查询语义理解路径的对比讲解封面">
+                <rect width="320" height="200" fill="#0f1d26"/>
+                <circle cx="78" cy="100" r="42" fill="none" stroke="#39d0ff" stroke-width="2.4"/>
+                <circle cx="78" cy="100" r="20" fill="#39d0ff" opacity=".22"/>
+                <path d="M120 100h56" stroke="#39d0ff" stroke-width="2.4" stroke-dasharray="7 6"/>
+                <rect x="182" y="62" width="104" height="24" rx="6" fill="#173040"/>
+                <rect x="182" y="90" width="104" height="24" rx="6" fill="#1d3c50"/>
+                <rect x="182" y="118" width="104" height="24" rx="6" fill="#25495f"/>
+                <g fill="#8fb4c9" font-size="10" font-family="sans-serif"><text x="192" y="78">字面匹配</text><text x="192" y="106">语义向量</text><text x="192" y="134">意图分类</text></g>
+              </svg>
+              <div class="corner"><span class="chip">深度</span></div>
+              <span class="play" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            </div>
+            <div class="mini-txt"><strong>查询语义理解的三条路径：字面、向量与意图</strong><span>林照 · 26:05</span></div>
+          </a>
+          <a class="mini" href="#stream">
+            <div class="cover">
+              <svg viewBox="0 0 320 200" role="img" aria-label="召回与排序架构演进的讲解封面">
+                <rect width="320" height="200" fill="#1a1226"/>
+                <g fill="none" stroke="#8b7bff" stroke-width="2.2">
+                  <rect x="26" y="80" width="52" height="40" rx="7"/>
+                  <rect x="110" y="52" width="52" height="34" rx="7"/>
+                  <rect x="110" y="114" width="52" height="34" rx="7"/>
+                  <rect x="194" y="52" width="52" height="34" rx="7"/>
+                  <rect x="194" y="114" width="52" height="34" rx="7"/>
+                  <rect x="272" y="82" width="34" height="34" rx="7"/>
+                  <path d="M78 100h32M162 69c16 0 16 31 32 31M162 131c16 0 16-31 32-31M246 69h14v31M246 131h14v-31"/>
+                </g>
+                <g fill="#bda9ff" font-size="10" font-family="sans-serif"><text x="34" y="104">召回</text><text x="118" y="73">粗排</text><text x="118" y="135">精排</text><text x="202" y="73">重排</text><text x="202" y="135">多样性</text></g>
+              </svg>
+              <div class="corner"><span class="chip">工程</span></div>
+              <span class="play" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            </div>
+            <div class="mini-txt"><strong>多级排序架构十年演进：从规则到学习排序</strong><span>周见山 · 41:12</span></div>
+          </a>
+          <a class="mini" href="#stream">
+            <div class="cover">
+              <svg viewBox="0 0 320 200" role="img" aria-label="搜索质量评估指标的可视化封面">
+                <rect width="320" height="200" fill="#211208"/>
+                <g fill="#ffcc00" opacity=".9">
+                  <rect x="46" y="120" width="26" height="50" rx="4"/>
+                  <rect x="84" y="94" width="26" height="76" rx="4"/>
+                  <rect x="122" y="132" width="26" height="38" rx="4"/>
+                  <rect x="160" y="66" width="26" height="104" rx="4"/>
+                  <rect x="198" y="102" width="26" height="68" rx="4"/>
+                  <rect x="236" y="46" width="26" height="124" rx="4"/>
+                </g>
+                <path d="M46 150c40-8 70 6 96-24s64-56 114-78" fill="none" stroke="#ff4d4d" stroke-width="2.6"/>
+                <circle cx="256" cy="48" r="4.4" fill="#ff4d4d"/>
+              </svg>
+              <div class="corner"><span class="chip">测评</span></div>
+              <span class="play" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            </div>
+            <div class="mini-txt"><strong>搜索质量怎么量化：从 MRR 到人工评估</strong><span>苏晚晴 · 19:47</span></div>
+          </a>
+          <a class="mini" href="#stream">
+            <div class="cover">
+              <svg viewBox="0 0 320 200" role="img" aria-label="搜索引擎冷启动优化的实战分享封面">
+                <rect width="320" height="200" fill="#0b1c18"/>
+                <g fill="none" stroke="#2ecc9e" stroke-width="2.2">
+                  <path d="M40 150c30 0 30-70 60-70s30 50 60 50 30-80 60-80 30 40 60 40"/>
+                </g>
+                <g fill="#2ecc9e" opacity=".8"><circle cx="40" cy="150" r="4"/><circle cx="100" cy="80" r="4"/><circle cx="160" cy="130" r="4"/><circle cx="220" cy="50" r="4"/><circle cx="280" cy="90" r="4"/></g>
+                <g fill="#a9e6d4" font-size="11" font-family="sans-serif"><text x="40" y="176">冷启动</text><text x="212" y="176">稳定期</text></g>
+              </svg>
+              <div class="corner"><span class="chip">实战</span></div>
+              <span class="play" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            </div>
+            <div class="mini-txt"><strong>新站冷启动：索引收录与首屏排序优化实战</strong><span>何砚 · 28:30</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门视频流 -->
+  <section id="stream" aria-labelledby="streamTitle" style="background:var(--bg-2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Content Stream</span>
+          <h2 id="streamTitle">热门内容 <span>/ 持续更新的精品内容</span></h2>
+          <p>覆盖搜索原理、检索工程、产品设计、行业观察四大板块，每周固定更新。</p>
+        </div>
+      </div>
+
+      <div class="filters" id="filters" role="group" aria-label="内容标签筛选">
+        <button type="button" class="active" data-filter="all">全部</button>
+        <button type="button" data-filter="原理">搜索原理</button>
+        <button type="button" data-filter="工程">检索工程</button>
+        <button type="button" data-filter="产品">产品设计</button>
+        <button type="button" data-filter="观察">行业观察</button>
+      </div>
+
+      <div class="stream" id="streamGrid">
+
+        <article class="vcard" data-tag="原理">
+          <div class="cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="分词器设计原理的讲解封面">
+              <rect width="400" height="225" fill="#101826"/>
+              <g fill="#ffcc00" opacity=".92">
+                <rect x="28" y="52" width="64" height="30" rx="6"/><rect x="102" y="52" width="64" height="30" rx="6"/>
+                <rect x="176" y="52" width="64" height="30" rx="6"/><rect x="250" y="52" width="64" height="30" rx="6"/>
+              </g>
+              <g fill="#0b1017" font-size="12" font-family="sans-serif" text-anchor="middle">
+                <text x="60" y="72">中文</text><text x="134" y="72">分词</text><text x="208" y="72">歧义</text><text x="282" y="72">消解</text>
+              </g>
+              <path d="M60 100v24h280v-24" fill="none" stroke="#3b4d6b" stroke-width="1.6" stroke-dasharray="6 5"/>
+              <g fill="none" stroke="#39d0ff" stroke-width="2"><rect x="78" y="138" width="244" height="40" rx="9"/></g>
+              <text x="200" y="163" fill="#39d0ff" font-size="13" font-family="sans-serif" text-anchor="middle">词项序列</text>
+            </svg>
+            <div class="corner"><span class="chip">教程</span></div>
+            <span class="play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">21:40</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#stream">中文分词为什么要处理歧义：切分歧义的三种典型场景</a></h3>
+            <div class="vmeta"><span class="avatar" style="background:#39d0ff">林</span><span>林照</span><span>·</span><span>2.1 万播放</span></div>
+            <p class="vdesc">从「研究生命起源」到「南京市长江大桥」，用真实语句说明切分歧义是怎么产生的，以及词典与统计模型各自的解法边界。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="1860"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg><span class="likeNum">1860</span></button>
+              <button class="act favBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg><span>收藏</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="vcard" data-tag="工程">
+          <div class="cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="分布式索引分片扩容的架构图封面">
+              <rect width="400" height="225" fill="#12101f"/>
+              <g fill="none" stroke="#8b7bff" stroke-width="2">
+                <rect x="34" y="88" width="62" height="50" rx="8"/>
+                <rect x="130" y="40" width="62" height="42" rx="8"/><rect x="130" y="96" width="62" height="42" rx="8"/><rect x="130" y="152" width="62" height="42" rx="8"/>
+                <rect x="236" y="40" width="62" height="42" rx="8"/><rect x="236" y="96" width="62" height="42" rx="8"/><rect x="236" y="152" width="62" height="42" rx="8"/>
+                <path d="M96 113h34M192 61h44M192 117h44M192 173h44M298 61h58v112h-58"/>
+              </g>
+              <circle cx="360" cy="117" r="13" fill="#8b7bff" opacity=".85"/>
+              <text x="360" y="121" fill="#0b1017" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="bold">汇</text>
+            </svg>
+            <div class="corner"><span class="chip new">新片</span><span class="chip">工程</span></div>
+            <span class="play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">34:02</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#stream">索引分片的扩容与迁移：一次不停机的检索升级记录</a></h3>
+            <div class="vmeta"><span class="avatar" style="background:#8b7bff">周</span><span>周见山</span><span>·</span><span>3.4 万播放</span></div>
+            <p class="vdesc">真实项目复盘：索引分片从 32 扩到 64，如何在双写、影子读与灰度切流之间控制风险，把命中波动压到可接受区间。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="3120"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg><span class="likeNum">3120</span></button>
+              <button class="act favBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg><span>收藏</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="vcard" data-tag="产品">
+          <div class="cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="搜索交互设计细节的界面示意图封面">
+              <rect width="400" height="225" fill="#0e1a1e"/>
+              <rect x="42" y="40" width="316" height="36" rx="18" fill="#173036"/>
+              <circle cx="66" cy="58" r="7" fill="none" stroke="#39d0ff" stroke-width="2"/>
+              <path d="M71 63l5 5" stroke="#39d0ff" stroke-width="2"/>
+              <rect x="90" y="54" width="150" height="8" rx="4" fill="#31555d"/>
+              <g fill="#1d3b42">
+                <rect x="42" y="92" width="152" height="42" rx="8"/><rect x="206" y="92" width="152" height="42" rx="8"/>
+                <rect x="42" y="146" width="152" height="42" rx="8"/><rect x="206" y="146" width="152" height="42" rx="8"/>
+              </g>
+              <g fill="#39d0ff" opacity=".6"><rect x="56" y="106" width="60" height="7" rx="3"/><rect x="220" y="106" width="76" height="7" rx="3"/><rect x="56" y="160" width="88" height="7" rx="3"/><rect x="220" y="160" width="52" height="7" rx="3"/></g>
+            </svg>
+            <div class="corner"><span class="chip">产品</span></div>
+            <span class="play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">17:26</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#stream">搜索结果页的留白与密度：一次可用性测试复盘</a></h3>
+            <div class="vmeta"><span class="avatar" style="background:#ff4d4d">苏</span><span>苏晚晴</span><span>·</span><span>1.6 万播放</span></div>
+            <p class="vdesc">我们找来了 24 位真实用户，只改动了标题行高与摘要截断方式，眼动数据与满意度评分的差异出乎所有人意料。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="1420"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg><span class="likeNum">1420</span></button>
+              <button class="act favBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg><span>收藏</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="vcard" data-tag="观察">
+          <div class="cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="搜索行业趋势观察的数据图形封面">
+              <rect width="400" height="225" fill="#141018"/>
+              <g fill="none" stroke="#ffcc00" stroke-width="2.6">
+                <path d="M36 178c44 0 44-46 88-46s44 30 88 30 44-74 88-74 30 22 56 22"/>
+              </g>
+              <g fill="#ffcc00" opacity=".9"><circle cx="36" cy="178" r="4"/><circle cx="124" cy="132" r="4"/><circle cx="212" cy="162" r="4"/><circle cx="300" cy="88" r="4"/><circle cx="356" cy="66" r="4"/></g>
+              <g stroke="#2b3546" stroke-width="1"><path d="M36 60h328M36 100h328M36 140h328M36 178h328"/></g>
+              <g fill="#ff4d4d" opacity=".5"><rect x="240" y="40" width="2" height="150"/></g>
+            </svg>
+            <div class="corner"><span class="chip hot">热议</span><span class="chip">观察</span></div>
+            <span class="play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">27:55</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#stream">检索行业观察：垂类搜索正在如何重新分布搜索需求</a></h3>
+            <div class="vmeta"><span class="avatar" style="background:#ffcc00">何</span><span>何砚</span><span>·</span><span>5.7 万播放</span></div>
+            <p class="vdesc">从通用搜索到垂直领域，从关键词到自然语言提问，我们梳理了近三年检索产品形态的变化，并给出可观察的判断依据。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="5640"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg><span class="likeNum">5640</span></button>
+              <button class="act favBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg><span>收藏</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="vcard" data-tag="原理">
+          <div class="cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="相关性打分的数学直觉讲解封面">
+              <rect width="400" height="225" fill="#0b1410"/>
+              <g fill="none" stroke="#2ecc9e" stroke-width="1.6">
+                <path d="M40 170c60-90 120-90 180 0" stroke-dasharray="5 6"/>
+                <path d="M40 60c60 90 120 90 180 0" stroke-dasharray="5 6"/>
+              </g>
+              <g fill="#2ecc9e"><circle cx="130" cy="119" r="7"/><circle cx="222" cy="94" r="7"/><circle cx="170" cy="152" r="7"/><circle cx="290" cy="140" r="7"/></g>
+              <g fill="none" stroke="#2ecc9e" stroke-width="1.4" opacity=".7">
+                <path d="M130 119l92-25M130 119l40 33M222 94l68 46M170 152l120-12"/>
+              </g>
+              <g fill="#a9e6d4" font-size="10" font-family="sans-serif"><text x="132" y="108">q</text><text x="225" y="84">d1</text><text x="188" y="146">d2</text><text x="292" y="132">d3</text></g>
+            </svg>
+            <div class="corner"><span class="chip">原理</span></div>
+            <span class="play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">23:11</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#stream">向量空间里的相关性打分，其实可以手算出来</a></h3>
+            <div class="vmeta"><span class="avatar" style="background:#2ecc9e">言</span><span>言澈</span><span>·</span><span>9800 播放</span></div>
+            <p class="vdesc">不做公式推导也能理解相关性：用一张二维图解释相似度、权重与惩罚项如何共同决定最终分值，并现场手算三个例子。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="980"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg><span class="likeNum">980</span></button>
+              <button class="act favBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg><span>收藏</span></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="vcard" data-tag="工程">
+          <div class="cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="检索性能压测实操的监控面板封面">
+              <rect width="400" height="225" fill="#111722"/>
+              <g fill="#1b2534"><rect x="30" y="34" width="160" height="70" rx="7"/><rect x="210" y="34" width="160" height="70" rx="7"/><rect x="30" y="120" width="340" height="72" rx="7"/></g>
+              <g stroke="#39d0ff" stroke-width="2" fill="none"><path d="M44 84l22-18 20 10 18-24 22 16 20-8 20 22"/></g>
+              <g stroke="#ff4d4d" stroke-width="2" fill="none"><path d="M224 90l20-30 20 40 18-26 22 12 20-32 22 26"/></g>
+              <g fill="#ffcc00" opacity=".85"><rect x="44" y="164" width="26" height="16" rx="3"/><rect x="80" y="156" width="26" height="24" rx="3"/><rect x="116" y="146" width="26" height="34" rx="3"/><rect x="152" y="160" width="26" height="20" rx="3"/><rect x="188" y="150" width="26" height="30" rx="3"/><rect x="224" y="142" width="26" height="38" rx="3"/></g>
+            </svg>
+            <div class="corner"><span class="chip">干货</span></div>
+            <span class="play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+            <span class="dur">30:08</span>
+          </div>
+          <div class="vbody">
+            <h3><a href="#stream">检索性能压测怎么做：从 QPS 曲线定位真正的瓶颈</a></h3>
+            <div class="vmeta"><span class="avatar" style="background:#39d0ff">陈</span><span>陈叙白</span><span>·</span><span>2.7 万播放</span></div>
+            <p class="vdesc">压测不是把并发拉满就完事。这条视频讲清楚如何设计阶梯流量、如何区分 CPU 瓶颈与 IO 等待，以及看哪些指标最有效。</p>
+            <div class="vfoot">
+              <button class="act likeBtn" type="button" data-count="2410"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22V10l5-8 1.5 1.5a3 3 0 010 4.2L12 10h7a2 2 0 012 2.3l-1.4 7A2 2 0 0117.6 22z"/></svg><span class="likeNum">2410</span></button>
+              <button class="act favBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.2-9A5 5 0 0112 5.4 5 5 0 0121.2 12c-2.2 4.4-9.2 9-9.2 9z"/></svg><span>收藏</span></button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <p id="emptyTip" style="display:none;color:var(--txt-3);font-size:13px;margin-top:22px">该分类下暂无匹配内容，已为你展示全部条目。</p>
+    </div>
+  </section>
+
+  <!-- 专题企划 -->
+  <section id="topics" aria-labelledby="topicTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Programs</span>
+          <h2 id="topicTitle">专题企划 <span>/ 值得系统看完</span></h2>
+          <p>以系列化的方式组织内容，帮助观众从零建立完整的搜索技术认知。</p>
+        </div>
+      </div>
+
+      <div class="topic-grid">
+        <article class="topic">
+          <div class="cover">
+            <svg viewBox="0 0 320 240" role="img" aria-label="检索原理入门十二讲专题封面">
+              <rect width="320" height="240" fill="#141d2c"/>
+              <g fill="none" stroke="#ffcc00" stroke-width="2"><circle cx="160" cy="120" r="66"/><circle cx="160" cy="120" r="44"/><circle cx="160" cy="120" r="22"/></g>
+              <g fill="#ffcc00"><circle cx="160" cy="54" r="5"/><circle cx="226" cy="120" r="5"/><circle cx="160" cy="186" r="5"/><circle cx="94" cy="120" r="5"/></g>
+              <text x="160" y="126" fill="#eaf2fa" font-size="14" font-family="sans-serif" text-anchor="middle">12 讲</text>
+            </svg>
+          </div>
+          <div class="topic-info">
+            <h3>检索原理入门十二讲</h3>
+            <p>从索引到排序，用十二个短片把搜索引擎的核心链路完整走一遍，适合零基础入门。</p>
+            <span class="topic-status"><i></i>连载中 · 已更新 9 讲</span>
+          </div>
+        </article>
+
+        <article class="topic">
+          <div class="cover">
+            <svg viewBox="0 0 320 240" role="img" aria-label="工程师访谈录专题封面">
+              <rect width="320" height="240" fill="#1b1526"/>
+              <g fill="none" stroke="#8b7bff" stroke-width="2"><rect x="60" y="66" width="80" height="96" rx="16"/><rect x="180" y="96" width="80" height="66" rx="12"/></g>
+              <g fill="#8b7bff"><circle cx="100" cy="96" r="14"/><circle cx="220" cy="122" r="10"/></g>
+              <g fill="#bda9ff" opacity=".7"><rect x="76" y="124" width="48" height="7" rx="3"/><rect x="76" y="138" width="34" height="7" rx="3"/><rect x="196" y="140" width="48" height="6" rx="3"/></g>
+            </svg>
+          </div>
+          <div class="topic-info">
+            <h3>工程师访谈录</h3>
+            <p>与检索方向的工程师聊聊他们真实的工作日常、踩过的坑，以及那些没写进文档里的经验。</p>
+            <span class="topic-status"><i></i>连载中 · 已更新 14 期</span>
+          </div>
+        </article>
+
+        <article class="topic">
+          <div class="cover">
+            <svg viewBox="0 0 320 240" role="img" aria-label="真实项目复盘专题封面">
+              <rect width="320" height="240" fill="#141e1a"/>
+              <g fill="none" stroke="#2ecc9e" stroke-width="2"><path d="M44 190h232"/><path d="M44 190V56"/></g>
+              <g stroke="#2ecc9e" stroke-width="2" fill="none"><path d="M60 168l44-30 40 18 40-46 36 22 44-58"/></g>
+              <g fill="#2ecc9e"><circle cx="60" cy="168" r="4"/><circle cx="104" cy="138" r="4"/><circle cx="144" cy="156" r="4"/><circle cx="184" cy="110" r="4"/><circle cx="220" cy="132" r="4"/><circle cx="264" cy="74" r="4"/></g>
+            </svg>
+          </div>
+          <div class="topic-info">
+            <h3>真实项目复盘</h3>
+            <p>每期拆解一个已上线的检索项目：目标、方案、数据变化与代价，不做美化，只说过程。</p>
+            <span class="topic-status"><i></i>已完结 · 共 8 集</span>
+          </div>
+        </article>
+
+        <article class="topic">
+          <div class="cover">
+            <svg viewBox="0 0 320 240" role="img" aria-label="搜索质量实验室专题封面">
+              <rect width="320" height="240" fill="#1e1710"/>
+              <g fill="none" stroke="#ff4d4d" stroke-width="2"><circle cx="160" cy="120" r="62"/><path d="M160 58v62l44 26"/></g>
+              <g fill="#ffcc00"><rect x="76" y="196" width="14" height="20" rx="3"/><rect x="98" y="184" width="14" height="32" rx="3"/><rect x="120" y="174" width="14" height="42" rx="3"/></g>
+              <g fill="#ff4d4d" opacity=".8"><rect x="208" y="188" width="14" height="28" rx="3"/><rect x="230" y="178" width="14" height="38" rx="3"/></g>
+            </svg>
+          </div>
+          <div class="topic-info">
+            <h3>搜索质量实验室</h3>
+            <p>用可复现的实验方法讨论质量评估：标注、抽样、指标选择，以及如何避免自欺欺人。</p>
+            <span class="topic-status"><i></i>连载中 · 已更新 6 期</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 创作者 -->
+  <section id="creators" aria-labelledby="creatorTitle" style="background:var(--bg-2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Creators</span>
+          <h2 id="creatorTitle">创作者矩阵 <span>/ 内容生态的支撑者</span></h2>
+          <p>来自搜索工程、算法研究、产品设计与内容创作一线的稳定创作者，是平台精品内容的来源。</p>
+        </div>
+      </div>
+
+      <div class="creator-scroll">
+        <article class="creator">
+          <div class="creator-top">
+            <span class="creator-av" style="background:linear-gradient(135deg,#ffcc00,#ff9f1a)">陈</span>
+            <div><strong>陈叙白</strong><span>检索架构 · 主创</span></div>
+          </div>
+          <p>十年检索系统从业者，擅长把复杂的索引结构讲成一张能看懂的图。更新稳定，评论区答疑也非常认真。</p>
+          <div class="creator-nums">
+            <div><b>128</b><span>作品</span></div>
+            <div><b>16.4 万</b><span>粉丝</span></div>
+            <div><b>9.6</b><span>口碑分</span></div>
+          </div>
+          <button class="btn btn-ghost btn-sm creator-more" type="button" data-author="陈叙白|检索架构 · 主创|十年检索系统从业者，擅长把复杂的索引结构讲成一张能看懂的图。长期更新《检索原理入门十二讲》系列，并负责社区的技术答疑栏目。|128|16.4 万">查看作者档案</button>
+        </article>
+
+        <article class="creator">
+          <div class="creator-top">
+            <span class="creator-av" style="background:linear-gradient(135deg,#39d0ff,#2e7bff)">林</span>
+            <div><strong>林照</strong><span>查询理解 · 算法</span></div>
+          </div>
+          <p>专注查询语义与意图识别方向，喜欢用真实搜索日志讲解模型表现，视频里几乎没有一句废话。</p>
+          <div class="creator-nums">
+            <div><b>94</b><span>作品</span></div>
+            <div><b>11.2 万</b><span>粉丝</span></div>
+            <div><b>9.4</b><span>口碑分</span></div>
+          </div>
+          <button class="btn btn-ghost btn-sm creator-more" type="button" data-author="林照|查询理解 · 算法|专注查询语义与意图识别方向，擅长用真实搜索日志讲解模型表现，主张以数据说话、以案例讲原理。|94|11.2 万">查看作者档案</button>
+        </article>
+
+        <article class="creator">
+          <div class="creator-top">
+            <span class="creator-av" style="background:linear-gradient(135deg,#8b7bff,#5a4be0)">周</span>
+            <div><strong>周见山</strong><span>检索工程 · 稳定性</span></div>
+          </div>
+          <p>长期做检索系统的容量与稳定性，节目风格是「先讲事故再讲方案」，被观众称为最实用的工程频道。</p>
+          <div class="creator-nums">
+            <div><b>76</b><span>作品</span></div>
+            <div><b>9.8 万</b><span>粉丝</span></div>
+            <div><b>9.7</b><span>口碑分</span></div>
+          </div>
+          <button class="btn btn-ghost btn-sm creator-more" type="button" data-author="周见山|检索工程 · 稳定性|长期负责检索系统的容量规划与稳定性建设，坚持先讲事故再讲方案的叙事方式，内容以真实项目复盘为主。|76|9.8 万">查看作者档案</button>
+        </article>
+
+        <article class="creator">
+          <div class="creator-top">
+            <span class="creator-av" style="background:linear-gradient(135deg,#ff4d4d,#ff8a5b)">苏</span>
+            <div><strong>苏晚晴</strong><span>搜索产品 · 体验</span></div>
+          </div>
+          <p>搜索产品的可用性研究者，热衷做小样本测试，并用可视化方式呈现那些容易被忽略的交互细节。</p>
+          <div class="creator-nums">
+            <div><b>61</b><span>作品</span></div>
+            <div><b>7.6 万</b><span>粉丝</span></div>
+            <div><b>9.5</b><span>口碑分</span></div>
+          </div>
+          <button class="btn btn-ghost btn-sm creator-more" type="button" data-author="苏晚晴|搜索产品 · 体验|搜索产品可用性研究者，擅长小样本可用性测试与眼动数据解读，作品多次被行业社区引用与讨论。|61|7.6 万">查看作者档案</button>
+        </article>
+
+        <article class="creator">
+          <div class="creator-top">
+            <span class="creator-av" style="background:linear-gradient(135deg,#2ecc9e,#12a87a)">何</span>
+            <div><strong>何砚</strong><span>行业观察 · 主持</span></div>
+          </div>
+          <p>检索行业的长期观察者与访谈主持，擅长在长对话里提出真正有信息量的问题。</p>
+          <div class="creator-nums">
+            <div><b>143</b><span>作品</span></div>
+            <div><b>13.5 万</b><span>粉丝</span></div>
+            <div><b>9.3</b><span>口碑分</span></div>
+          </div>
+          <button class="btn btn-ghost btn-sm creator-more" type="button" data-author="何砚|行业观察 · 主持|检索行业长期观察者与访谈主持，主持《工程师访谈录》系列，关注产品形态与技术趋势的交叉变化。|143|13.5 万">查看作者档案</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 搜索随笔 -->
+  <section id="stories" aria-labelledby="storyTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Essays</span>
+          <h2 id="storyTitle">搜索随笔 <span>/ 镜头之外的记录</span></h2>
+          <p>视频之外，我们也用文字记录那些来不及剪进片子的细节与心情。</p>
+        </div>
+      </div>
+
+      <div class="story-grid">
+        <article class="story">
+          <h3>录了七遍的那条索引视频</h3>
+          <p>第一次录制时我讲得太快，回看发现自己跳过了最关键的一步：词项到底是怎么落到词典里的。第二次改白板，第三次换机位，第七次才终于把话说顺。做技术内容最难的不是不懂，而是如何把懂了的东西重新变回「不懂」的状态，再一步一步走出来。</p>
+          <div class="story-by"><span class="avatar" style="background:#ffcc00">陈</span><span>陈叙白 · 创作手记</span></div>
+        </article>
+        <article class="story">
+          <h3>在评论区遇到真正的问题</h3>
+          <p>有位观众在视频下认真写了两百字，描述他所在的小团队在做站内检索时的困境：数据量不大，却一直找不到合适的排序策略。我们后来聊了三个小时。他说的一句话我记到现在——「我们缺的不是方案，是有人告诉我们这个方向值得走」。那一刻我觉得做这个社区是有意义的。</p>
+          <div class="story-by"><span class="avatar" style="background:#39d0ff">林</span><span>林照 · 社区故事</span></div>
+        </article>
+        <article class="story">
+          <h3>好的检索应该让人感觉不到检索</h3>
+          <p>做搜索产品久了会发现，用户从来不夸「排序好」，他们只会说「一下就找到了」。这句朴素的话其实包含了大量工程与设计工作。我们花了很多期内容去拆解这种「感觉不到」是怎么被造出来的，也提醒自己：技术的价值在于让它本身退到幕后，把结果留给使用者。</p>
+          <div class="story-by"><span class="avatar" style="background:#ff4d4d">苏</span><span>苏晚晴 · 产品随想</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 影像墙 -->
+  <section id="gallery" aria-labelledby="galleryTitle" style="background:var(--bg-2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Gallery</span>
+          <h2 id="galleryTitle">影像墙 <span>/ 社区作品精选</span></h2>
+          <p>由社区创作者投稿并经过编辑精选的封面与图文作品，风格多元，视角各异。</p>
+        </div>
+      </div>
+
+      <div class="wall">
+        <figure class="w1">
+          <svg viewBox="0 0 600 440" role="img" aria-label="索引结构可视化实验的作品封面">
+            <rect width="600" height="440" fill="#0f1b2b"/>
+            <g stroke="#39d0ff" stroke-width="1.4" opacity=".55" fill="none">
+              <circle cx="300" cy="200" r="120"/><circle cx="300" cy="200" r="86"/><circle cx="300" cy="200" r="52"/>
+              <path d="M60 200h480M300 20v360M140 70l320 260M460 70L140 330"/>
+            </g>
+            <g fill="#ffcc00">
+              <circle cx="300" cy="80" r="8"/><circle cx="420" cy="200" r="8"/><circle cx="300" cy="320" r="8"/>
+              <circle cx="180" cy="200" r="8"/><circle cx="385" cy="115" r="8"/><circle cx="215" cy="285" r="8"/>
+            </g>
+            <g fill="#eaf2fa" font-size="15" font-family="sans-serif" text-anchor="middle">
+              <text x="300" y="206">检索关系图谱</text>
+            </g>
+          </svg>
+          <figcaption>作品 01 · 索引结构可视化实验</figcaption>
+        </figure>
+
+        <figure class="w2">
+          <svg viewBox="0 0 600 220" role="img" aria-label="查询日志流动路径的图形作品封面">
+            <rect width="600" height="220" fill="#171226"/>
+            <g stroke="#8b7bff" stroke-width="2" fill="none">
+              <path d="M0 150c90 0 90-70 180-70s90 70 180 70 90-70 240-70"/>
+              <path d="M0 180c90 0 90-50 180-50s90 50 180 50 90-40 240-40" opacity=".5"/>
+            </g>
+            <g fill="#8b7bff" opacity=".85"><circle cx="180" cy="80" r="5"/><circle cx="360" cy="150" r="5"/><circle cx="540" cy="80" r="5"/></g>
+            <g fill="#cbbfff" font-size="13" font-family="sans-serif"><text x="24" y="60">QUERY LOG</text></g>
+          </svg>
+          <figcaption>作品 02 · 查询日志的流动路径</figcaption>
+        </figure>
+
+        <figure class="w3">
+          <svg viewBox="0 0 400 220" role="img" aria-label="分词切片效果的图形作品封面">
+            <rect width="400" height="220" fill="#1c150e"/>
+            <g fill="#ffcc00"><rect x="26" y="86" width="58" height="34" rx="6"/><rect x="92" y="86" width="72" height="34" rx="6"/><rect x="172" y="86" width="52" height="34" rx="6"/><rect x="232" y="86" width="88" height="34" rx="6"/><rect x="328" y="86" width="46" height="34" rx="6"/></g>
+            <g fill="#1c150e" font-size="12" font-family="sans-serif" text-anchor="middle"><text x="55" y="108">查询</text><text x="128" y="108">意图</text><text x="198" y="108">词项</text><text x="276" y="108">文档</text><text x="351" y="108">排序</text></g>
+            <path d="M26 60h348" stroke="#ffcc00" stroke-width="1.6" stroke-dasharray="8 7" opacity=".6"/>
+            <path d="M26 156h348" stroke="#ffcc00" stroke-width="1.6" stroke-dasharray="8 7" opacity=".6"/>
+          </svg>
+          <figcaption>作品 03 · 分词切片效果</figcaption>
+        </figure>
+
+        <figure class="w4">
+          <svg viewBox="0 0 200 220" role="img" aria-label="延迟分布直方图的图形作品封面">
+            <rect width="200" height="220" fill="#101f1a"/>
+            <g fill="#2ecc9e">
+              <rect x="20" y="140" width="20" height="52" rx="3"/><rect x="48" y="112" width="20" height="80" rx="3"/>
+              <rect x="76" y="80" width="20" height="112" rx="3"/><rect x="104" y="120" width="20" height="72" rx="3"/>
+              <rect x="132" y="150" width="20" height="42" rx="3"/><rect x="160" y="164" width="20" height="28" rx="3"/>
+            </g>
+            <g fill="#a9e6d4" font-size="11" font-family="sans-serif"><text x="20" y="40">LATENCY</text></g>
+          </svg>
+          <figcaption>作品 04 · 延迟分布</figcaption>
+        </figure>
+
+        <figure class="w5">
+          <svg viewBox="0 0 400 440" role="img" aria-label="检索链路全景图的图形作品封面">
+            <rect width="400" height="440" fill="#0d1626"/>
+            <g fill="none" stroke="#ffcc00" stroke-width="2.2">
+              <rect x="60" y="40" width="280" height="52" rx="10"/>
+              <rect x="60" y="118" width="280" height="52" rx="10"/>
+              <rect x="60" y="196" width="280" height="52" rx="10"/>
+              <rect x="60" y="274" width="280" height="52" rx="10"/>
+              <rect x="60" y="352" width="280" height="52" rx="10"/>
+            </g>
+            <g fill="none" stroke="#39d0ff" stroke-width="1.8" stroke-dasharray="6 6">
+              <path d="M200 92v26M200 170v26M200 248v26M200 326v26"/>
+            </g>
+            <g fill="#eaf2fa" font-size="14" font-family="sans-serif" text-anchor="middle">
+              <text x="200" y="72">查询解析</text><text x="200" y="150">召回</text><text x="200" y="228">粗排</text>
+              <text x="200" y="306">精排</text><text x="200" y="384">结果呈现</text>
+            </g>
+          </svg>
+          <figcaption>作品 05 · 检索链路全景</figcaption>
+        </figure>
+
+        <figure class="w6">
+          <svg viewBox="0 0 400 220" role="img" aria-label="搜索词云与热度分布的图形作品封面">
+            <rect width="400" height="220" fill="#1e1116"/>
+            <g fill="#ff4d4d"><circle cx="90" cy="110" r="42" opacity=".8"/><circle cx="190" cy="80" r="26" opacity=".6"/><circle cx="290" cy="130" r="34" opacity=".7"/></g>
+            <g fill="#ffd0d0" font-size="13" font-family="sans-serif" text-anchor="middle"><text x="90" y="114">索引</text><text x="190" y="84">召回</text><text x="290" y="134">排序</text></g>
+            <g fill="#ff4d4d" opacity=".5"><circle cx="342" cy="70" r="14"/><circle cx="60" cy="190" r="10"/></g>
+          </svg>
+          <figcaption>作品 06 · 搜索词热度分布</figcaption>
+        </figure>
+
+        <figure class="w7">
+          <svg viewBox="0 0 400 220" role="img" aria-label="离线评估与线上指标对照的图形作品封面">
+            <rect width="400" height="220" fill="#131b2b"/>
+            <g fill="none" stroke="#39d0ff" stroke-width="2"><path d="M40 170c50-70 90 20 140-46s100 40 180-62"/></g>
+            <g fill="none" stroke="#ffcc00" stroke-width="2" stroke-dasharray="7 7"><path d="M40 150c50-50 90 10 140-36s100 30 180-52"/></g>
+            <g fill="#9fb0c3" font-size="11" font-family="sans-serif"><text x="40" y="200">离线指标</text><text x="220" y="200">线上指标</text></g>
+          </svg>
+          <figcaption>作品 07 · 离线与线上指标对照</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 企业动态 + FAQ -->
+  <section id="updates" aria-labelledby="updatesTitle">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Updates &amp; Help</span>
+          <h2 id="updatesTitle">企业动态与帮助 <span>/ 官方发布</span></h2>
+          <p>品牌资讯、内容更新与常见问题，在这里集中呈现，便于创作者与观众了解平台进展。</p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div>
+          <h3 style="font-size:16px;margin-bottom:22px">近期动态</h3>
+          <div class="timeline">
+            <div class="tl">
+              <time>2025-04-02</time>
+              <strong>「搜索原理公开课」第 12 期上线</strong>
+              <p>本期主题为倒排索引与召回排序的衔接，配套提供一份可运行的示例工程说明，已在内容页同步发布。</p>
+            </div>
+            <div class="tl">
+              <time>2025-03-26</time>
+              <strong>创作者招募计划开放报名</strong>
+              <p>面向检索工程、算法研究、产品设计方向的内容创作者开放报名，通过审核后可获得选题支持与制作协助。</p>
+            </div>
+            <div class="tl">
+              <time>2025-03-15</time>
+              <strong>社区投稿通道完成升级</strong>
+              <p>投稿流程缩短至三步，支持视频、图文与图文混排三种形态，审核状态可在个人中心实时查看。</p>
+            </div>
+            <div class="tl">
+              <time>2025-03-06</time>
+              <strong>《工程师访谈录》第十四期发布</strong>
+              <p>与一位从事检索系统十年的工程师聊了聊稳定性建设的取舍，完整版已上线，评论区整理同步更新。</p>
+            </div>
+            <div class="tl">
+              <time>2025-02-20</time>
+              <strong>搜索质量实验室专题开播</strong>
+              <p>新专题聚焦可复现的质量评估方法，首期讲解了标注与抽样的常见误区，后续每两周更新一期。</p>
+            </div>
+          </div>
+
+          <h3 style="font-size:16px;margin:32px 0 14px">合作品牌与伙伴</h3>
+          <div class="partners">
+            <div class="partner">检索技术联盟</div>
+            <div class="partner">开放数据基金会</div>
+            <div class="partner">开发者社区计划</div>
+            <div class="partner">高校联合实验室</div>
+            <div class="partner">内容版权伙伴</div>
+            <div class="partner">云基础设施伙伴</div>
+          </div>
+        </div>
+
+        <div class="faq" id="faq">
+          <h3 style="font-size:16px;margin-bottom:22px">常见问题</h3>
+          <details open>
+            <summary>平台的内容主要覆盖哪些方向？</summary>
+            <div class="answer">目前以搜索原理、检索工程、产品设计与行业观察四大方向为主，同时保留生活方式、创作幕后等轻量题材，保证内容生态既有专业深度，也有可阅读性。</div>
+          </details>
+          <details>
+            <summary>创作者如何加入并投稿？</summary>
+            <div class="answer">点击页面顶部或底部的「投稿入口」按钮即可提交基本信息与选题方向。编辑会在五个工作日内回复，通过后会安排一次选题沟通，并提供制作规范与素材支持。</div>
+          </details>
+          <details>
+            <summary>内容是否为原创与正版？</summary>
+            <div class="answer">平台所有视频与图文均为原创或已获授权的内容，转载与合作需求请通过页面底部的联系方式与我们沟通，我们会提供正式的授权流程说明。</div>
+          </details>
+          <details>
+            <summary>视频的画质与播放体验如何保障？</summary>
+            <div class="answer">我们提供高清版本与多码率自适应方案，并对常用网络环境做了针对性优化。若遇到播放异常，可通过反馈入口提交设备与网络信息，便于技术同学定位。</div>
+          </details>
+          <details>
+            <summary>能否在视频下方提出技术问题？</summary>
+            <div class="answer">可以。评论区是平台非常重视的部分，主创与编辑会定期整理高频问题并单独制作答疑内容，部分问题还会被收录进专题企划。</div>
+          </details>
+          <details>
+            <summary>是否有面向新人的入门路径？</summary>
+            <div class="answer">有。推荐从《检索原理入门十二讲》专题开始，按顺序观看后再进入工程实践部分，会明显减少理解断层。专题页内已标注推荐顺序。</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用户评价 -->
+  <section aria-labelledby="voiceTitle" style="background:var(--bg-2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="sec-tag">Voices</span>
+          <h2 id="voiceTitle">用户评价 <span>/ 来自社区的真实反馈</span></h2>
+          <p>这些评价来自长期观看与参与讨论的观众，也是我们持续运营的动力。</p>
+        </div>
+      </div>
+
+      <div class="voices">
+        <div class="voice q">
+          <div class="voice-head"><span class="avatar" style="background:#ffcc00">李</span><strong>李工 · 后端工程师</strong><span>2025-03-28</span></div>
+          <p>看了倒排索引那一期，终于把以前零散的知识点串起来了。最难得的是讲清楚了「为什么这样设计」，而不是只给结论。顺手把整套系列刷完了，笔记记了十几页。</p>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="voice q">
+          <div class="voice-head"><span class="avatar" style="background:#39d0ff">郑</span><strong>郑小满 · 产品经理</strong><span>2025-03-22</span></div>
+          <p>作为非技术背景的产品，我原以为这类内容会看不懂。但可用性测试那期讲得非常具体，连测试脚本的写法都有，第二天就在团队里复用了。</p>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="voice q">
+          <div class="voice-head"><span class="avatar" style="background:#8b7bff">吴</span><strong>吴一舟 · 在校学生</strong><span>2025-03-16</span></div>
+          <p>选题扎实，节奏舒服，不会为了时长硬拉。希望以后能多出一些面向初学者的课程式内容，最好带练习题，那样学习效率会更高。</p>
+          <span class="stars">★★★★☆</span>
+        </div>
+        <div class="voice q">
+          <div class="voice-head"><span class="avatar" style="background:#ff4d4d">陈</span><strong>陈默 · 独立开发者</strong><span>2025-03-09</span></div>
+          <p>我一个人做小项目，很多工程经验只能靠试错。压测那期把我的认知纠正过来了，原来瓶颈真不一定在数据库。省了我至少两周的排查时间。</p>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="voice q">
+          <div class="voice-head"><span class="avatar" style="background:#2ecc9e">何</span><strong>何可 · 内容编辑</strong><span>2025-02-27</span></div>
+          <p>作为同行，我很欣赏这里的内容态度：不夸张、不标题党，标题和内容对得上。评论区氛围也好，能看到真正在讨论问题的人。</p>
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="voice q">
+          <div class="voice-head"><span class="avatar" style="background:#ff9f1a">周</span><strong>周语 · 算法爱好者</strong><span>2025-02-18</span></div>
+          <p>向量空间那期的二维图解释很妙，我截图发给同学，他一看就懂了。唯一建议是希望每期视频下面能附一份参考阅读清单。</p>
+          <span class="stars">★★★★☆</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 投稿 CTA -->
+  <section aria-labelledby="ctaTitle">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2 id="ctaTitle">把你的检索经验，变成别人的一次顿悟</h2>
+          <p>无论你是工程师、研究者还是内容创作者，只要你有值得讲述的搜索故事与技术细节，欢迎加入我们的内容生态。平台提供选题支持、制作协助与正版素材授权，长期陪伴创作者成长。</p>
+        </div>
+        <div class="cta-actions">
+          <button class="btn btn-primary" type="button" id="submitBtn2">立即投稿</button>
+          <button class="btn btn-ghost" type="button" id="feedbackBtn">意见反馈</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:4px">
+          <span class="logo-mark" aria-hidden="true">YX</span>
+          <span class="logo-text"><strong>YANDEX搜索引擎</strong><span>SEARCH ENGINE</span></span>
+        </div>
+        <p class="foot-desc">YANDEX搜索引擎官方网站，专注检索技术与信息检索领域的原创视频内容平台。我们坚持正版、原创、高清的内容标准，深耕垂直领域，以匠心打磨每一期节目，让技术知识拥有更好的表达方式。</p>
+        <div class="badge-row">
+          <span class="badge">官方网站</span>
+          <span class="badge">原创内容</span>
+          <span class="badge">持续运营中</span>
+          <span class="badge">值得信赖</span>
+        </div>
+      </div>
+      <div>
+        <h4>内容导航</h4>
+        <a href="#focus">视频焦点</a>
+        <a href="#stream">热门内容</a>
+        <a href="#topics">专题企划</a>
+        <a href="#gallery">社区影像墙</a>
+      </div>
+      <div>
+        <h4>关于我们</h4>
+        <a href="#creators">创作者矩阵</a>
+        <a href="#stories">搜索随笔</a>
+        <a href="#updates">企业动态</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <div>
+        <h4>联系与投稿</h4>
+        <p>投稿咨询：creator@yandex-search.example</p>
+        <p>合作洽谈：partner@yandex-search.example</p>
+        <p>内容反馈：support@yandex-search.example</p>
+        <p style="color:var(--txt-3)">工作时间：周一至周五 10:00 - 19:00</p>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2025 YANDEX搜索引擎 官方网站 · 版权所有 · 内容未经授权不得转载</span>
+      <span class="beian">
+        <span>备案号占位-XXXXXXX</span>
+        <span>增值电信业务经营许可证占位</span>
+        <span>网络文化经营许可证占位</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- 弹窗：作者档案 -->
+<div class="modal-mask" id="authorModal" role="dialog" aria-modal="true" aria-labelledby="authorModalTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="authorModalTitle">作者档案</h3>
+      <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
+    </div>
+    <p id="authorBody"></p>
+  </div>
+</div>
+
+<!-- 弹窗：分享 -->
+<div class="modal-mask" id="shareModal" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="shareTitle">分享这条内容</h3>
+      <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
+    </div>
+    <p>把这条内容分享给同样关注检索技术的朋友，也可以直接复制页面链接。</p>
+    <div class="share-row">
+      <button type="button" data-share="微信">微信</button>
+      <button type="button" data-share="微博">微博</button>
+      <button type="button" data-share="QQ">QQ</button>
+    </div>
+    <div class="copy-line">
+      <input id="copyInput" type="text" readonly value="YANDEX搜索引擎 官方网站 · 检索技术视频内容平台">
+      <button class="btn btn-primary btn-sm" type="button" id="copyBtn">复制</button>
+    </div>
+  </div>
+</div>
+
+<!-- 弹窗：投稿 -->
+<div class="modal-mask" id="submitModal" role="dialog" aria-modal="true" aria-labelledby="submitTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="submitTitle">投稿入口</h3>
+      <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
+    </div>
+    <p>填写基本信息，编辑会在五个工作日内与你联系。我们欢迎检索技术、产品设计、行业观察方向的原创内容。</p>
+    <form id="submitForm">
+      <div class="field">
+        <label for="subName">称呼</label>
+        <input id="subName" type="text" placeholder="如何称呼你" required>
+      </div>
+      <div class="field">
+        <label for="subContact">联系方式</label>
+        <input id="subContact" type="text" placeholder="邮箱或常用社交账号" required>
+      </div>
+      <div class="field">
+        <label for="subIdea">选题方向</label>
+        <textarea id="subIdea" placeholder="简单描述你准备讲的内容与角度" required></textarea>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-ghost btn-sm" type="button" data-close>取消</button>
+        <button class="btn btn-primary btn-sm" type="submit">提交投稿</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 弹窗：反馈 -->
+<div class="modal-mask" id="feedbackModal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="feedbackTitle">意见反馈</h3>
+      <button class="modal-close" type="button" data-close aria-label="关闭">✕</button>
+    </div>
+    <p>无论是播放体验、内容建议还是页面问题，都欢迎告诉我们。你的反馈会由社区运营同学统一跟进。</p>
+    <form id="feedbackForm">
+      <div class="field">
+        <label for="fbType">反馈类型</label>
+        <input id="fbType" type="text" placeholder="例如：播放异常 / 内容建议 / 页面问题" required>
+      </div>
+      <div class="field">
+        <label for="fbText">具体描述</label>
+        <textarea id="fbText" placeholder="请描述你遇到的情况或想法" required></textarea>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-ghost btn-sm" type="button" data-close>取消</button>
+        <button class="btn btn-primary btn-sm" type="submit">提交反馈</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<button id="toTop" type="button" aria-label="回到顶部">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  "use strict";
+
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200);
+  }
+
+  /* 移动端导航 */
+  var burger = document.getElementById('burger');
+  var mainNav = document.getElementById('mainNav');
+  burger.addEventListener('click', function(){
+    var open = mainNav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mainNav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      mainNav.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* 搜索 */
+  var searchInput = document.getElementById('siteSearch');
+  var searchTip = document.getElementById('searchTip');
+  var searchBtn = document.getElementById('searchBtn');
+  var hotWords = ['倒排索引','查询理解','排序策略','分词','压测','可用性测试','向量检索','冷启动'];
+
+  function doSearch(){
+    var kw = searchInput.value.trim();
+    if(!kw){
+      searchTip.innerHTML = '试试搜索：' + hotWords.slice(0,4).map(function(w){return '<b>'+w+'</b>';}).join('、');
+      searchTip.classList.add('show');
+      return;
+    }
+    var matched = hotWords.filter(function(w){ return w.indexOf(kw) > -1 || kw.indexOf(w) > -1; });
+    if(matched.length){
+      searchTip.innerHTML = '已匹配到相关内容：<b>' + matched.join('、') + '</b>，正在为你定位视频流。';
+    }else{
+      searchTip.innerHTML = '暂未匹配到「<b>' + kw.replace(/[<>&]/g,'') + '</b>」，已为你推荐热门内容，可浏览下方视频流。';
+    }
+    searchTip.classList.add('show');
+    document.getElementById('stream').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  searchBtn.addEventListener('click', doSearch);
+  searchInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.search-box')) searchTip.classList.remove('show');
+  });
+
+  /* 标签筛选 */
+  var filters = document.getElementById('filters');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#streamGrid .vcard'));
+  var emptyTip = document.getElementById('emptyTip');
+  filters.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn) return;
+    filters.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    var shown = 0;
+    cards.forEach(function(card){
+      var ok = (f === 'all' || card.getAttribute('data-tag') === f);
+      card.classList.toggle('is-hidden', !ok);
+      if(ok) shown++;
+    });
+    emptyTip.style.display = shown ? 'none' : 'block';
+    if(!shown){
+      cards.forEach(function(card){ card.classList.remove('is-hidden'); });
+      setTimeout(function(){ emptyTip.style.display = 'none'; }, 1600);
+    }
+  });
+
+  /* 点赞 */
+  document.querySelectorAll('.likeBtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var numEl = btn.querySelector('.likeNum');
+      var n = parseInt(btn.getAttribute('data-count'), 10) || 0;
+      var liked = btn.classList.toggle('liked');
+      n = liked ? n + 1 : n - 1;
+      if(n < 0) n = 0;
+      btn.setAttribute('data-count', n);
+      numEl.textContent = n;
+      toast(liked ? '已点赞，感谢你的支持' : '已取消点赞');
+    });
+  });
+
+  /* 收藏 */
+  document.querySelectorAll('.favBtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var on = btn.classList.toggle('faved');
+      var svg = btn.querySelector('svg');
+      svg.setAttribute('fill', on ? 'currentColor' : 'none');
+      btn.querySelector('span').textContent = on ? '已收藏' : '收藏';
+      toast(on ? '已加入收藏，可在个人中心查看' : '已取消收藏');
+    });
+  });
+
+  /* 分享弹窗 */
+  var shareModal = document.getElementById('shareModal');
+  document.querySelectorAll('.shareBtn').forEach(function(btn){
+    btn.addEventListener('click', function(){ openModal(shareModal); });
+  });
+
+  /* 通用弹窗控制 */
+  function openModal(el){ el.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function closeModal(el){ el.classList.remove('show'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.modal-mask').forEach(function(mask){
+    mask.addEventListener('click', function(e){
+      if(e.target === mask || e.target.closest('[data-close]')) closeModal(mask);
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.modal-mask.show').forEach(closeModal);
+    }
+  });
+
+  /* 分享按钮 */
+  document.querySelectorAll('[data-share]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var name = b.getAttribute('data-share');
+      closeModal(shareModal);
+      toast('已生成' + name + '分享卡片，可粘贴给好友');
+    });
+  });
+
+  /* 复制链接 */
+  var copyBtn = document.getElementById('copyBtn');
+  copyBtn.addEventListener('click', function(){
+    var input = document.getElementById('copyInput');
+    input.removeAttribute('readonly');
+    input.select();
+    input.setSelectionRange(0, input.value.length);
+    var ok = false;
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(input.value);
+        ok = true;
+      }
+    }catch(err){ ok = false; }
+    if(!ok){
+      try{ ok = document.execCommand('copy'); }catch(err2){ ok = false; }
+    }
+    input.setAttribute('readonly','readonly');
+    closeModal(shareModal);
+    toast(ok ? '链接已复制到剪贴板' : '复制失败，请手动选择文本复制');
+  });
+
+  /* 作者档案 */
+  var authorModal = document.getElementById('authorModal');
+  var authorBody = document.getElementById('authorBody');
+  document.querySelectorAll('.creator-more').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var parts = btn.getAttribute('data-author').split('|');
+      authorBody.innerHTML = '<strong style="color:#e6edf3;font-size:14.5px">' + parts[0] + '</strong>' +
+        '<span style="color:#ffcc00;font-size:12.5px;display:block;margin:2px 0 10px">' + parts[1] + '</span>' +
+        '<span style="display:block;line-height:1.95">' + parts[2] + '</span>' +
+        '<span style="display:flex;gap:26px;margin-top:16px;padding-top:14px;border-top:1px solid #23303f">' +
+        '<span><b style="display:block;color:#e6edf3;font-size:15px">' + parts[3] + '</b><span style="font-size:11.5px;color:#6d8098">作品</span></span>' +
+        '<span><b style="display:block;color:#e6edf3;font-size:15px">' + parts[4] + '</b><span style="font-size:11.5px;color:#6d8098">粉丝</span></span>' +
+        '</span>';
+      openModal(authorModal);
+    });
+  });
+
+  /* 投稿 */
+  var submitModal = document.getElementById('submitModal');
+  function bindOpen(id, modal){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('click', function(){ openModal(modal); });
+  }
+  bindOpen('submitBtn', submitModal);
+  bindOpen('submitBtn2', submitModal);
+  document.getElementById('submitForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    closeModal(submitModal);
+    this.reset();
+    toast('投稿信息已提交，编辑会在五个工作日内联系你');
+  });
+
+  /* 反馈 */
+  var feedbackModal = document.getElementById('feedbackModal');
+  bindOpen('feedbackBtn', feedbackModal);
+  document.getElementById('feedbackForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    closeModal(feedbackModal);
+    this.reset();
+    toast('反馈已收到，感谢你的帮助');
+  });
+
+  /* 数字滚动 */
+  var counted = false;
+  function runCounters(){
+    if(counted) return;
+    counted = true;
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-count'));
+      var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+      var start = null;
+      var dur = 1300;
+      function step(ts){
+        if(!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var ease = 1 - Math.pow(1 - p, 3);
+        var val = target * ease;
+        el.textContent = dec ? val.toFixed(dec) : Math.floor(val).toLocaleString('en-US');
+        if(p < 1) requestAnimationFrame(step);
+        else el.textContent = dec ? target.toFixed(dec) : Math.floor(target).toLocaleString('en-US');
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var statsEl = document.querySelector('.stats');
+  if('IntersectionObserver' in window && statsEl){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ runCounters(); io.disconnect(); } });
+    }, {threshold:0.3});
+    io.observe(statsEl);
+  }else{
+    runCounters();
+  }
+
+  /* 回到顶部 */
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 520) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  }, {passive:true});
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+})();
+</script>
+</body>
+          </html>
